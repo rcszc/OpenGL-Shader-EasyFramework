@@ -1,9 +1,9 @@
 // ShaderFramework. windows. msvc 170.
 // rcsz. version 1.5.0
  
-//[2023-5-15] maths[ÆúÓÃ](ÅäºÏglm). Ôö¼ÓclassDelete(ÓÃÓÚÍ³Ò»ÊÍ·Å). Ôö¼ÓFrameBufferObject.
-//[2023-5-17] ExtenÔö¼ÓRTX¼ì²â. ¿ÉÆôÓÃRT.Core¹â×·¼ÓËÙ.
-//[2023-5-22] ×ªÎª²ÉÓÃÈı½ÇÃæäÖÈ¾ Model,ÆúÓÃ RectModel.
+//[2023-5-15] maths[å¼ƒç”¨](é…åˆglm). å¢åŠ classDelete(ç”¨äºç»Ÿä¸€é‡Šæ”¾). å¢åŠ FrameBufferObject.
+//[2023-5-17] Extenå¢åŠ RTXæ£€æµ‹. å¯å¯ç”¨RT.Coreå…‰è¿½åŠ é€Ÿ.
+//[2023-5-22] è½¬ä¸ºé‡‡ç”¨ä¸‰è§’é¢æ¸²æŸ“ Model,å¼ƒç”¨ RectModel.
 
 #ifndef _SHADERFRAMEWORK_H
 #define _SHADERFRAMEWORK_H
@@ -11,19 +11,7 @@
 #include "ShaderFramework_define.hpp"
 #include "framework_log/Framework_ConsoleLog.hpp"
 
-/* ¿ìËÙ²é¿´ËùÓĞÀà:
-- GCS_LoadShader, GCS_LoadTexture, GCS_LoadModelData, GCS_LoadShaderUniform, GCS_LoadFrameBuffer.
-- GC_LoadInformation.
-*/
-#define VIEW_FRAME_CLASS 0
-
-/* ¿ìËÙ²é¿´ËùÓĞº¯Êı:
-- GC_ShaderTexture, GC_ShaderDrawMD, GC_ShaderEnable.
-- GC_FrameBuffer_Above, GC_FrameBuffer_Below.
-*/
-#define VIEW_FRAME_FUNCTION 0
-
-// ¿ªÆôMSAA¿¹¾â³İ "glEnable(GL_MULTISAMPLE)".
+// å¼€å¯MSAAæŠ—é”¯é½¿ "glEnable(GL_MULTISAMPLE)".
 void PGC_MSAA(); 
 //******************************** load shader ********************************
 // opengl glew init shader,program.
@@ -43,7 +31,7 @@ protected:
 	GC_CHARPTR _load_shader_file(GC_TEXT _file);                  // load file.
 	GCBIT _shader_compile(GLuint _shaderhandle, GC_TEXT _shader); // compile, print errorlog.
 public:
-	// ÖØ¸´±àÒë: Èç¹ûshader±àÒëÊ§°Ü»áÔÙ±àÒëÒ»´Î.[À¬»øAMDÃ«²¡]
+	// é‡å¤ç¼–è¯‘: å¦‚æœshaderç¼–è¯‘å¤±è´¥ä¼šå†ç¼–è¯‘ä¸€æ¬¡.[åƒåœ¾AMDæ¯›ç—…]
 	GCS_LoadShader(GCBIT RepeatCompile = false) {
 		repeat_compile = RepeatCompile;
 		// init glewshader.
@@ -108,7 +96,7 @@ public:
 };
 
 //******************************** load shaderdata ********************************
-// TraingleModel. ÆäËûÔÚÀ©Õ¹¿âÖĞ.
+// TraingleModel. å…¶ä»–åœ¨æ‰©å±•åº“ä¸­.
 void __GLEW_SHADERDRAW_MODEL(GC_MODELINDEX& objectindex);
 void __GLEW_USESHADER(GCUI32& index);
 
@@ -125,7 +113,7 @@ extern GCS_LoadModelData GCSF_TransmitData;
 extern GCFP32 ShaderTestCube[(GC_VERTEX_LENGTH) * 4];
 extern GCSIZE ShaderTestCubeLen;
 
-// ÓÃÓÚFBOäÖÈ¾µ½Õû¸öÆÁÄ»ÎÆÀí.
+// ç”¨äºFBOæ¸²æŸ“åˆ°æ•´ä¸ªå±å¹•çº¹ç†.
 GCFP32* FBO_RDwindowCube(GC_VEC2f WindowCoord);
 extern GCSIZE FBO_RDwindowCubeLen;
 
@@ -135,7 +123,7 @@ void __GLEW_FBOBIND(GCUI32& FBO);
 void __GLEW_FBOUNBIND();
 void __GLEW_CLEARBUFFER();
 
-// FBO ²Ù×÷½ÏÎªÏ¸»¯. 
+// FBO æ“ä½œè¾ƒä¸ºç»†åŒ–. 
 class GCS_LoadFrameBuffer {
 protected:
 	GCUI32 framebuffer_index = NULL;
@@ -143,7 +131,7 @@ public:
 	GCS_LoadFrameBuffer();
 	~GCS_LoadFrameBuffer() {};
 
-	// ½«FBO°ó¶¨µ½Texture.
+	// å°†FBOç»‘å®šåˆ°Texture.
 	void bind_framebuffer(GCUI32 texture);
 	// return FBO + UnBind FBO.
 	GCUI32 get_framebufferindex();
@@ -164,11 +152,11 @@ public:
 extern GCS_LoadShaderUniform GCSF_GlobalValue;
 
 //******************************** load information ********************************
-// command: sysinfo GPU [»ñÈ¡GPUĞÅÏ¢]. NotOut.
-// command: sysinfo Attribs [»ñÈ¡"location"×î´óÖµ].
-// command: sysinfo Texture [»ñÈ¡"TxetureUnits"×î´óÖµ].
-// command: sysinfo MEMcpiy [»ñÈ¡ÏÔ´æÈİÁ¿].
-// command: sysinfo MEMsize [»ñÈ¡ÏÔ´æÓàÁ¿].
+// command: sysinfo GPU [è·å–GPUä¿¡æ¯]. NotOut.
+// command: sysinfo Attribs [è·å–"location"æœ€å¤§å€¼].
+// command: sysinfo Texture [è·å–"TxetureUnits"æœ€å¤§å€¼].
+// command: sysinfo MEMcpiy [è·å–æ˜¾å­˜å®¹é‡].
+// command: sysinfo MEMsize [è·å–æ˜¾å­˜ä½™é‡].
 class GC_LoadInformation {
 protected:
 	GCSIZE _tempvalue = NULL;
@@ -206,9 +194,9 @@ extern GC_DeleteGLindex GCSF_DeleteIndex;
 #define GC_ShaderDrawMD __GLEW_SHADERDRAW_MODEL // draw model.
 #define GC_ShaderEnable __GLEW_USESHADER        // use shader program.
 
-#define GC_FrameBuffer_Above __GLEW_FBOBIND   // ¿ªÊ¼FBO²Ù×÷.
-#define GC_FrameBuffer_Below __GLEW_FBOUNBIND // ½áÊøFBO²Ù×÷(²¢ÇĞ»»»ØÄ¬ÈÏFBO).
+#define GC_FrameBuffer_Above __GLEW_FBOBIND   // å¼€å§‹FBOæ“ä½œ.
+#define GC_FrameBuffer_Below __GLEW_FBOUNBIND // ç»“æŸFBOæ“ä½œ(å¹¶åˆ‡æ¢å›é»˜è®¤FBO).
 
-#define GC_ClearFrameBuffer __GLEW_CLEARBUFFER // ÇåÀíÖ¡»º³å.
+#define GC_ClearFrameBuffer __GLEW_CLEARBUFFER // æ¸…ç†å¸§ç¼“å†².
 
 #endif
